@@ -1,0 +1,46 @@
+func main()  {
+    info := Info{}
+
+    var v Visitor = &info
+    v = LogVisitor{v}
+    v = OtherVisitor{v}
+    v = NameVisitor{v}
+
+
+    loadFile := func(info *Info, err error) error {
+       info.Name = "tonyfan"
+       info.NameSpace = "tce"
+       info.OtherThings = "We are running as remote team"
+       fmt.Println("main: loadFile ...")
+       return nil
+    }
+
+    v.Visit(loadFile)
+}
+===============================================================
+
+info Info = {}
+v1 Visitor = &info
+v2 LogVisitor = {visitor: v1}
+v3 OtherVisitor = {visitor: v2}
+v4 NameVisitor = {visitor: v3}
+
+info Info = {}
+v1 Visitor = &info
+v2 LogVisitor = {visitor: &info}
+v3 OtherVisitor = {visitor: {visitor: &info}}
+v4 NameVisitor = {visitor: {visitor: {visitor: &info}}}
+
+
+
+info Info = {}
+v Visitor = &info
+v LogVisitor = {visitor: v}
+v OtherVisitor = {visitor: v}
+v NameVisitor = {visitor: v}
+
+info Info = {}
+v Visitor = &info
+v LogVisitor = {visitor: &info}
+v OtherVisitor = {visitor: {visitor: &info}}
+v NameVisitor = {visitor: {visitor: {visitor: &info}}}
