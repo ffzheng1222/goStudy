@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+//定义包名
+package etcd_pb;
+//定义生成的go文件的包名"路径;别名"
+option go_package = "./etcd_pb";
+
+
+message KeyValue {
+  string key = 1;
+  bytes value = 2;
+}
+
+message Key {
+  string name = 1;
+  int64 version = 2;
+}
